@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rupika Yerrapally | Healthcare Analyst</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0D5D7C;
+            --accent: #00A3D8;
+            --dark: #0A1628;
+            --slate: #334155;
+            --light: #F8FBFF;
+            --border: #E0E7FF;
+            --purple: #7C3AED;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--slate);
+            background: linear-gradient(135deg, #F0F4FF 0%, #F8FBFF 50%, #EEF5FF 100%);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 320px;
+            height: 100vh;
+            background: linear-gradient(180deg, #0F1D35 0%, #1a2f4a 50%, #162e43 100%);
+            padding: 3rem 1.8rem;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 8px 0 32px rgba(13, 93, 124, 0.2);
+        }
+
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .sidebar-header h1 {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.4rem;
+        }
+
+        .sidebar-header p {
+            color: var(--accent);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2.2px;
+            font-weight: 700;
+            margin-top: 0.8rem;
+        }
+
+        .sidebar-header > div {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar-header a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            word-break: break-all;
+        }
+
+        .sidebar-header a:hover { color: white; }
+
+        .sidebar-header .location {
+            color: #E2ECF4;
+            font-size: 0.8rem;
+            margin: 0.5rem 0;
+            font-weight: 500;
+        }
+
+        .nav-menu {
+            list-style: none;
+            margin-bottom: 3rem;
+        }
+
+        .nav-menu li { margin-bottom: 0.8rem; }
+
+        .nav-menu button {
+            width: 100%;
+            padding: 1.05rem 1.3rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid transparent;
+            color: #E2ECF4;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.95rem;
+        }
+
+        .nav-menu i {
+            font-size: 1.2rem;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        .nav-menu button:hover {
+            background: rgba(0, 163, 216, 0.15);
+            border-color: var(--accent);
+            transform: translateX(6px);
+        }
+
+        .nav-menu button.active {
+            background: linear-gradient(135deg, var(--accent) 0%, #0099c4 100%);
+            color: white;
+            border-color: white;
+            font-weight: 600;
+        }
+
+        .section-menu {
+            list-style: none;
+            margin-bottom: 2.5rem;
+            padding: 1.6rem;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 163, 216, 0.2);
+        }
+
+        .section-menu h3 {
+            color: var(--accent);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+        }
+
+        .section-menu li { margin-bottom: 0.6rem; }
+
+        .section-menu button {
+            width: 100%;
+            padding: 0.85rem 1.1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            color: #E2ECF4;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            text-align: left;
+        }
+
+        .section-menu button:hover {
+            background: rgba(0, 163, 216, 0.2);
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .section-menu button.active {
+            background: linear-gradient(135deg, var(--accent) 0%, #0099c4 100%);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .main-content {
+            margin-left: 320px;
+            width: calc(100% - 320px);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .home-page {
+            display: none;
+            width: 100%;
+            max-width: 800px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .home-page.active { display: flex; flex-direction: column; }
+
+        .page-container {
+            display: none;
+            width: 100%;
+            padding: 4rem 5rem;
+            animation: fadeInUp 0.6s ease;
+            min-height: 100vh;
+        }
+
+        .page-container.active { display: block; }
+
+        .section { display: none; }
+        .section.active { display: block; animation: fadeInUp 0.6s ease; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 5rem 4rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(13, 93, 124, 0.3);
+            width: 100%;
+        }
+
+        .hero-content { position: relative; z-index: 2; text-align: left; }
+
+        .hero-content h2 {
+            font-family: 'Calibri', serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            font-style: italic;
+        }
+
+        .hero-content h3 {
+            font-family: 'Calibri', serif;
+            font-size: 28px;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            font-style: italic;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .hero-content .email {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 0.6rem;
+            font-weight: 500;
+        }
+
+        .hero-content .linkedin {
+            font-size: 0.95rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content .linkedin:hover { color: white; text-decoration: underline; }
+
+        .divider {
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--purple) 100%);
+            border-radius: 2px;
+            margin: 0 0 2.5rem 0;
+        }
+
+        .hero-content p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin-bottom: 2.8rem;
+            color: #E8F1FF;
+            font-weight: 400;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            width: 100%;
+        }
+
+        .btn {
+            padding: 1.2rem 2.4rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #D1D5DB 0%, #F3F4F6 100%);
+            color: #1F2937;
+            box-shadow: 0 10px 28px rgba(209, 213, 219, 0.35);
+            border: 2px solid #E5E7EB;
+        }
+
+        .btn-primary:hover { transform: translateY(-4px); }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #E5E7EB 0%, #F9FAFB 100%);
+            color: #1F2937;
+            box-shadow: 0 10px 28px rgba(209, 213, 219, 0.35);
+            border: 2px solid #D1D5DB;
+        }
+
+        .btn-secondary:hover { transform: translateY(-4px); }
+
+        .btn-tertiary {
+            background: linear-gradient(135deg, #F3F4F6 0%, #FFFFFF 100%);
+            color: #1F2937;
+            box-shadow: 0 10px 28px rgba(209, 213, 219, 0.35);
+            border: 2px solid #E5E7EB;
+        }
+
+        .btn-tertiary:hover { transform: translateY(-4px); }
+
+        .page-header {
+            margin-bottom: 4.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            font-weight: 800;
+            letter-spacing: -1.2px;
+            font-family: 'Calibri', serif;
+            font-style: italic;
+        }
+
+        .header-line {
+            width: 140px;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--purple) 100%);
+            border-radius: 3px;
+            margin-top: 1.8rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.8rem;
+            margin-bottom: 4.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.8rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 48px rgba(0, 163, 216, 0.18);
+            border-color: var(--accent);
+        }
+
+        .card h3 {
+            color: var(--dark);
+            font-size: 1.4rem;
+            margin-bottom: 1.1rem;
+            font-weight: 700;
+            font-family: 'Calibri', serif;
+            font-style: italic;
+        }
+
+        .card p {
+            color: var(--slate);
+            font-size: 0.97rem;
+            line-height: 1.85;
+            margin-bottom: 1.6rem;
+        }
+
+        .card-list {
+            list-style: none;
+        }
+
+        .card-list li {
+            padding: 0.7rem 0;
+            color: var(--slate);
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .card-list li:hover {
+            transform: translateX(6px);
+            color: var(--accent);
+        }
+
+        .card-list li::before {
+            content: '→';
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .back-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #E5E7EB 0%, #F3F4F6 100%);
+            border: 3px solid;
+            border-image: linear-gradient(135deg, #1E40AF 0%, #7C3AED 100%) 1;
+            border-radius: 12px;
+            color: #1E40AF;
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(209, 213, 219, 0.3);
+        }
+
+        .back-icon:hover {
+            transform: scale(1.12);
+            box-shadow: 0 8px 20px rgba(30, 64, 175, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { width: 280px; left: -280px; }
+            .main-content { margin-left: 0; width: 100%; }
+            .page-container { padding: 2rem 1.5rem; }
+            .hero-section { padding: 3rem 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h1>Rupika</h1>
+            <p>Healthcare Analyst</p>
+            <div>
+                <a href="mailto:rupikayerrapally@gmail.com">rupikayerrapally@gmail.com</a>
+                <p class="location">📍 Gurnee, Illinois</p>
+            </div>
+        </div>
+
+        <ul class="nav-menu">
+            <li><button onclick="showPage('home')" class="nav-btn active" data-page="home"><i class="fas fa-chart-line"></i> Home</button></li>
+            <li><button onclick="showPage('about')" class="nav-btn" data-page="about">Who Am I?</button></li>
+            <li><button onclick="showPage('skills')" class="nav-btn" data-page="skills">Tech Skills</button></li>
+            <li><button onclick="showPage('experience')" class="nav-btn" data-page="experience">Experience</button></li>
+            <li><button onclick="showPage('contact')" class="nav-btn" data-page="contact">Contact</button></li>
+        </ul>
+
+        <ul class="section-menu" id="aboutSections" style="display:none;">
+            <h3>Sections</h3>
+            <li><button onclick="showSection('about-intro')" class="section-btn active" data-section="about-intro">About Me</button></li>
+            <li><button onclick="showSection('about-done')" class="section-btn" data-section="about-done">What I've Done</button></li>
+            <li><button onclick="showSection('about-help')" class="section-btn" data-section="about-help">How I Help</button></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <!-- HOME PAGE -->
+        <div id="home" class="home-page active">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h2>Hi!</h2>
+                    <h3>Rupika Yerrapally</h3>
+                    <p class="subtitle">Health Insurance BA</p>
+                    <p class="email">rupikayerrapally@gmail.com</p>
+                    <a href="https://www.linkedin.com/in/rupikayr?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" class="linkedin">LinkedIn Profile →</a>
+                    <div class="divider"></div>
+                    <p>Business and Proposal Analyst with 13+ years of experience in proposal development, claims reimbursement, contract management, and pre-sales support. Proven expertise in underwriting, business process optimization, and data-driven insights. Skilled in RFP/RFI management, market research, and strategic decision support. I help organizations optimize performance, manage proposals, and drive operational excellence.</p>
+                    <div class="cta-buttons">
+                        <button class="btn btn-primary" onclick="showPage('about'); setTimeout(() => showSection('about-intro'), 100)">Who Am I</button>
+                        <button class="btn btn-secondary" onclick="showPage('about'); setTimeout(() => showSection('about-done'), 100)">What I've Done</button>
+                        <button class="btn btn-tertiary" onclick="showPage('skills')">Tech Skills</button>
+                        <button class="btn btn-tertiary" onclick="showPage('about'); setTimeout(() => showSection('about-help'), 100)">How I Help</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page-container">
+        <button onclick="showPage('home')" class="back-icon"><i class="fas fa-chart-line"></i></button>
+        
+        <!-- ABOUT INTRO -->
+        <div id="about-intro" class="section active">
+            <div class="page-header">
+                <h1>Who Am I?</h1>
+                <div class="header-line"></div>
+            </div>
+            <div class="grid">
+                <div class="card"><h3>Professional</h3><p>Business Analyst Consultant at Highmark Health with 13+ years in proposal development, claims reimbursement, and pre-sales support.</p></div>
+                <div class="card"><h3>Core Competencies</h3><p>RFP/RFI management, proposal writing, underwriting analysis, business process optimization, and data-driven decision support.</p></div>
+                <div class="card"><h3>Passion</h3><p>Transforming healthcare operations through strategic analysis and helping organizations drive operational excellence.</p></div>
+            </div>
+        </div>
+
+        <!-- ABOUT DONE -->
+        <div id="about-done" class="section">
+            <div class="page-header">
+                <h1>What Have I Done So Far?</h1>
+                <div class="header-line"></div>
+            </div>
+
+            <div class="page-header" style="margin-top: 3rem;">
+                <h1 style="font-size: 24px;">Professional Experience</h1>
+                <div class="header-line"></div>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>Business Analyst Consultant</h3>
+                    <p style="color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem;"><strong>Highmark Health (HNAS)</strong><br>May 2024 – Present</p>
+                    <ul class="card-list">
+                        <li>Drive cross-functional collaboration for data-driven insights</li>
+                        <li>Lead predictive modeling, KPI tracking & performance management</li>
+                        <li>Developed Javelina solutions for claims, customer service & PG penalties</li>
+                        <li>Created workforce planning model using Erlang C formula</li>
+                        <li>Ensure data integrity through quality assurance & trend analysis</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Underwriter</h3>
+                    <p style="color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem;"><strong>Highmark Health (HNAS)</strong><br>April 2023 – May 2024</p>
+                    <ul class="card-list">
+                        <li>Conducted risk assessments & compliance reviews</li>
+                        <li>Developed competitive pricing strategies</li>
+                        <li>Created underwriting reports & dashboards</li>
+                        <li>Performed financial analysis & actuarial support</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Proposal Analyst</h3>
+                    <p style="color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem;"><strong>Flume Health</strong><br>May 2021 – January 2023</p>
+                    <ul class="card-list">
+                        <li>Spearheaded proposals using Ringmaster Technology</li>
+                        <li>Secured major self-funded client (1,000+ lives)</li>
+                        <li>Addressed risk & pharmacy spend concerns</li>
+                        <li>Standardized proposal review & reporting processes</li>
+                        <li>Enhanced team productivity through process improvement</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Independent Consultant</h3>
+                    <p style="color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem;"><strong>Phamax</strong><br>October 2013 – October 2015</p>
+                    <ul class="card-list">
+                        <li>Created scientific newsletters for pharma clients</li>
+                        <li>Developed medical content & scientific writing</li>
+                        <li>Managed editorial & client coordination independently</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Senior Business Analyst</h3>
+                    <p style="color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem;"><strong>Mphasis (Healthcare KPO)</strong><br>May 2010 – January 2012</p>
+                    <ul class="card-list">
+                        <li>Developed Life Sciences solution offerings</li>
+                        <li>Built proposal content for business development</li>
+                        <li>Facilitated knowledge management</li>
+                        <li>Designed client-ready marketing content</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Business Analyst</h3>
+                    <p style="color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem;"><strong>Cognizant Technology Solutions</strong><br>January 2008 – May 2010</p>
+                    <ul class="card-list">
+                        <li>Led RFP response winning document migration project</li>
+                        <li>Won major biopharma client engagement</li>
+                        <li>Managed offshore teams & client communications</li>
+                        <li>Managed clinical documentation project milestones</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Research Analyst</h3>
+                    <p style="color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem;"><strong>SmartAnalyst India Pvt. Ltd.</strong><br>January 2006 – June 2007</p>
+                    <ul class="card-list">
+                        <li>Delivered market research & competitive intelligence</li>
+                        <li>Tailored reports for pharma clients</li>
+                        <li>Evaluated licensing opportunities</li>
+                        <li>Conducted pipeline assessments</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Assistant Manager (Content Development)</h3>
+                    <p style="color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem;"><strong>Indegene Lifesystems</strong><br>May 2005 – December 2005</p>
+                    <ul class="card-list">
+                        <li>Developed e-learning modules</li>
+                        <li>Performed medical writing & disease monographs</li>
+                        <li>Supported marketing with scientific content</li>
+                        <li>Created visual aids & educational materials</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="page-header" style="margin-top: 4rem;">
+                <h1 style="font-size: 24px;">Educational Qualifications</h1>
+                <div class="header-line"></div>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>M.Tech in Bioinformatics</h3>
+                    <p style="color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem;"><strong>SASTRA Deemed University</strong><br>Thanjavur (2003–2005)</p>
+                    <p>Advanced degree in bioinformatics with focus on computational biology and data analysis methodologies.</p>
+                </div>
+
+                <div class="card">
+                    <h3>B.Tech in Pharmaceutical Engineering & Technology</h3>
+                    <p style="color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem;"><strong>Anna University</strong><br>Tiruchirappalli (1999–2003)</p>
+                    <p>Undergraduate degree in pharmaceutical engineering with comprehensive understanding of industry processes and regulatory frameworks.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABOUT HELP -->
+        <div id="about-help" class="section">
+            <div class="page-header">
+                <h1>How Can I Help You?</h1>
+                <div class="header-line"></div>
+            </div>
+            <div class="grid">
+                <div class="card"><h3>Performance Guarantee Management</h3><p>Design and manage comprehensive PG frameworks. Monitor SLA compliance, calculate penalties, and support strategic performance initiatives.</p></div>
+                <div class="card"><h3>Operational Analytics</h3><p>Build advanced dashboards and reporting systems. Transform complex data into actionable business intelligence.</p></div>
+                <div class="card"><h3>Underwriting & Compliance</h3><p>Conduct comprehensive underwriting analysis and compliance reviews. Support sound risk-based decision making and regulatory adherence.</p></div>
+                <div class="card"><h3>Claims Operations Optimization</h3><p>Analyze and optimize claims workflows. Identify inefficiencies and implement process improvements.</p></div>
+                <div class="card"><h3>Proposal Writing & Development</h3><p>Develop winning proposals and RFI responses. Craft compelling, data-driven narratives that address client needs and demonstrate value.</p></div>
+                <div class="card"><h3>Data Integration & Analysis</h3><p>Integrate data from multiple operational systems. Build seamless data pipelines for unified visibility and strategic insights.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TECH SKILLS PAGE -->
+    <div id="skills" class="page-container">
+        <button onclick="showPage('home')" class="back-icon"><i class="fas fa-chart-line"></i></button>
+        <div class="page-header">
+            <h1>Technical Skills</h1>
+            <div class="header-line"></div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h3>Databases & Platforms</h3>
+                <ul class="card-list">
+                    <li>Salesforce</li>
+                    <li>Javelina</li>
+                    <li>Cedar Gate</li>
+                    <li>Ringmaster</li>
+                    <li>Metabase</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Analytics & BI Tools</h3>
+                <ul class="card-list">
+                    <li>Tableau</li>
+                    <li>MS Excel (Advanced)</li>
+                    <li>Power BI</li>
+                    <li>Forecast Modeling</li>
+                    <li>SWOT & PESTLE Analysis</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Programming & Modeling</h3>
+                <ul class="card-list">
+                    <li>SQL</li>
+                    <li>VBA</li>
+                    <li>Erlang C (Workforce Planning)</li>
+                    <li>Predictive Modeling</li>
+                    <li>Data Analysis</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-header" style="margin-top: 4rem;">
+            <h1 style="font-size: 24px;">Healthcare Systems & Tools</h1>
+            <div class="header-line"></div>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <h3>Claims & Operations</h3>
+                <ul class="card-list">
+                    <li>Claims Systems</li>
+                    <li>Avaya</li>
+                    <li>eBill</li>
+                    <li>Audit Systems</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Business & Proposal Tools</h3>
+                <ul class="card-list">
+                    <li>RFP/RFI Tools</li>
+                    <li>Contract Management</li>
+                    <li>Compliance Systems</li>
+                    <li>HubSpot</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-header" style="margin-top: 4rem;">
+            <h1 style="font-size: 24px;">Business & Professional Skills</h1>
+            <div class="header-line"></div>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <h3>Proposal & RFP Management</h3>
+                <ul class="card-list">
+                    <li>RFP/RFI Writing</li>
+                    <li>Proposal Development</li>
+                    <li>Contract Drafting</li>
+                    <li>SPD Creation</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Business Analysis</h3>
+                <ul class="card-list">
+                    <li>Process Optimization</li>
+                    <li>Market Research</li>
+                    <li>Competitive Analysis</li>
+                    <li>Strategic Planning</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Claims & Underwriting</h3>
+                <ul class="card-list">
+                    <li>Claims Reimbursement</li>
+                    <li>Underwriting Analysis</li>
+                    <li>Risk Assessment</li>
+                    <li>Compliance</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Professional Skills</h3>
+                <ul class="card-list">
+                    <li>Project Management</li>
+                    <li>Team Leadership</li>
+                    <li>Stakeholder Communication</li>
+                    <li>Medical Writing & Content Creation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXPERIENCE PAGE -->
+    <div id="experience" class="page-container">
+        <button onclick="showPage('home')" class="back-icon"><i class="fas fa-chart-line"></i></button>
+        <div class="page-header">
+            <h1>Experience Timeline</h1>
+            <div class="header-line"></div>
+        </div>
+        <div class="grid">
+            <div class="card"><h3>Business Analyst Consultant</h3><p style="color: var(--accent); font-size: 0.9rem;"><strong>Highmark Health (HNAS) | May 2024 – Present</strong></p><ul class="card-list"><li>Developed comprehensive PG trackers using Tableau</li><li>Built 100+ KPI reporting system</li><li>Designed integrated dashboards</li></ul></div>
+            <div class="card"><h3>Underwriter</h3><p style="color: var(--accent); font-size: 0.9rem;"><strong>Highmark Health (HNAS) | April 2023 – May 2024</strong></p><ul class="card-list"><li>Conducted risk assessments</li><li>Developed pricing strategies</li><li>Created underwriting reports</li></ul></div>
+            <div class="card"><h3>Proposal Analyst</h3><p style="color: var(--accent); font-size: 0.9rem;"><strong>Flume Health | May 2021 – January 2023</strong></p><ul class="card-list"><li>Spearheaded proposal development</li><li>Secured major clients</li><li>Standardized processes</li></ul></div>
+            <div class="card"><h3>Senior Business Analyst</h3><p style="color: var(--accent); font-size: 0.9rem;"><strong>Mphasis | May 2010 – January 2012</strong></p><ul class="card-list"><li>Developed solutions</li><li>Built proposal content</li></ul></div>
+            <div class="card"><h3>Business Analyst</h3><p style="color: var(--accent); font-size: 0.9rem;"><strong>Cognizant | January 2008 – May 2010</strong></p><ul class="card-list"><li>Led RFP responses</li><li>Won biopharma project</li></ul></div>
+            <div class="card"><h3>Research Analyst</h3><p style="color: var(--accent); font-size: 0.9rem;"><strong>SmartAnalyst | January 2006 – June 2007</strong></p><ul class="card-list"><li>Market research</li><li>Competitive intelligence</li></ul></div>
+        </div>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page-container">
+        <button onclick="showPage('home')" class="back-icon"><i class="fas fa-chart-line"></i></button>
+        <div class="page-header">
+            <h1>Let's Connect</h1>
+            <div class="header-line"></div>
+        </div>
+        <div style="background: white; padding: 3rem; border-radius: 16px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);">
+            <h2 style="color: var(--dark); font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: 800;">Get In Touch</h2>
+            <p style="color: var(--slate); font-size: 1rem; line-height: 1.8; margin-bottom: 2rem;">I'm interested in discussing healthcare analytics, performance optimization, underwriting strategy, and proposal development initiatives. Let's connect!</p>
+            <form id="contactForm" style="margin-bottom: 2rem;">
+                <div style="margin-bottom: 1.5rem;"><label style="color: var(--dark); font-weight: 600; display: block; margin-bottom: 0.5rem;">Name *</label><input type="text" name="name" required style="width: 100%; padding: 0.8rem 1rem; border: 2px solid var(--border); border-radius: 8px; font-size: 0.95rem;"></div>
+                <div style="margin-bottom: 1.5rem;"><label style="color: var(--dark); font-weight: 600; display: block; margin-bottom: 0.5rem;">Email *</label><input type="email" name="email" required style="width: 100%; padding: 0.8rem 1rem; border: 2px solid var(--border); border-radius: 8px; font-size: 0.95rem;"></div>
+                <div style="margin-bottom: 1.5rem;"><label style="color: var(--dark); font-weight: 600; display: block; margin-bottom: 0.5rem;">Subject *</label><input type="text" name="subject" required style="width: 100%; padding: 0.8rem 1rem; border: 2px solid var(--border); border-radius: 8px; font-size: 0.95rem;"></div>
+                <div style="margin-bottom: 2rem;"><label style="color: var(--dark); font-weight: 600; display: block; margin-bottom: 0.5rem;">Message *</label><textarea name="message" required style="width: 100%; padding: 0.8rem 1rem; border: 2px solid var(--border); border-radius: 8px; font-size: 0.95rem; min-height: 140px;"></textarea></div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+            <p style="text-align: center; color: var(--slate); font-size: 0.9rem;">📍 Gurnee, Illinois | 🕐 Typically respond within 24-48 hours</p>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.home-page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.page-container').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+            if (pageId === 'home') {
+                document.getElementById('home').classList.add('active');
+                document.querySelector('[data-page="home"]').classList.add('active');
+                document.getElementById('aboutSections').style.display = 'none';
+            } else {
+                document.getElementById(pageId).classList.add('active');
+                document.querySelector(`[data-page="${pageId}"]`).classList.add('active');
+                if (pageId === 'about') {
+                    document.getElementById('aboutSections').style.display = 'block';
+                    showSection('about-intro');
+                } else {
+                    document.getElementById('aboutSections').style.display = 'none';
+                }
+            }
+        }
+
+        function showSection(sectionId) {
+            document.getElementById('about-intro').classList.remove('active');
+            document.getElementById('about-done').classList.remove('active');
+            document.getElementById('about-help').classList.remove('active');
+            document.getElementById(sectionId).classList.add('active');
+
+            document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = this.name.value;
+            const email = this.email.value;
+            const subject = this.subject.value;
+            const message = this.message.value;
+            window.location.href = `mailto:rupikayerrapally@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+            this.reset();
+        });
+    </script>
+</body>
+</html>
