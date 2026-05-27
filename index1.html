@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rupika Yerrapally | Healthcare Analyst</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0D5D7C;
+            --accent: #00A3D8;
+            --dark: #0A1628;
+            --slate: #334155;
+            --light: #F8FBFF;
+            --border: #E0E7FF;
+            --success: #10B981;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Calibri', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--slate);
+            background: linear-gradient(135deg, var(--light) 0%, #F0F4FF 50%, #E8F1FF 100%);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 320px;
+            height: 100vh;
+            background: linear-gradient(180deg, var(--dark) 0%, #1a2f4a 100%);
+            padding: 2.5rem 1.5rem;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 8px 0 32px rgba(13, 93, 124, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent) 0%, #0D5D7C 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 3rem;
+            border: 3px solid var(--accent);
+            color: white;
+            box-shadow: 0 8px 24px rgba(0, 163, 216, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.08) rotateY(5deg);
+        }
+
+        .sidebar-header h1 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .sidebar-header p {
+            color: var(--accent);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            list-style: none;
+            margin-bottom: 3rem;
+            flex: 1;
+        }
+
+        .nav-menu li {
+            margin-bottom: 0.6rem;
+        }
+
+        .nav-menu button {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid transparent;
+            color: #E2ECF4;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Calibri', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-menu button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-menu button:hover::before {
+            left: 100%;
+        }
+
+        .nav-menu button:hover {
+            background: rgba(0, 163, 216, 0.15);
+            border-color: var(--accent);
+            transform: translateX(6px);
+            box-shadow: 0 4px 12px rgba(0, 163, 216, 0.2);
+        }
+
+        .nav-menu button.active {
+            background: linear-gradient(135deg, var(--accent) 0%, #0099c4 100%);
+            color: white;
+            border-color: white;
+            box-shadow: 0 6px 20px rgba(0, 163, 216, 0.4);
+            font-weight: 600;
+        }
+
+        .nav-menu button i {
+            font-size: 1.15rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        /* SECTION MENU */
+        .section-menu {
+            list-style: none;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-menu h3 {
+            color: var(--accent);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .section-menu button {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #E2ECF4;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Calibri', sans-serif;
+            text-align: left;
+        }
+
+        .section-menu button:hover {
+            background: rgba(0, 163, 216, 0.2);
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .section-menu button.active {
+            background: linear-gradient(135deg, var(--accent) 0%, #0099c4 100%);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .sidebar-footer {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .contact-link {
+            color: #E2ECF4;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.6rem 0.8rem;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+            background: rgba(0, 163, 216, 0.1);
+            transform: translateX(4px);
+        }
+
+        .contact-link i {
+            font-size: 1.1rem;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            margin-left: 320px;
+            width: calc(100% - 320px);
+            min-height: 100vh;
+        }
+
+        .page {
+            display: none;
+            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            min-height: 100vh;
+            padding: 3.5rem 4.5rem;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* PAGE HEADER */
+        .page-header {
+            margin-bottom: 4rem;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            letter-spacing: -1px;
+        }
+
+        .page-header h1 i {
+            color: var(--accent);
+            font-size: 3.2rem;
+            filter: drop-shadow(0 4px 8px rgba(0, 163, 216, 0.2));
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .header-line {
+            width: 120px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+            border-radius: 3px;
+            margin-top: 1.5rem;
+        }
+
+        /* HOME PAGE */
+        .hero-section {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 5rem;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 4rem;
+            box-shadow: 0 16px 48px rgba(13, 93, 124, 0.25);
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -5%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 163, 216, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 163, 216, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(40px) scale(1.05); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
+        }
+
+        .hero-content h2 {
+            font-size: 2.8rem;
+            margin-bottom: 0.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .hero-content p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            color: #E8F1FF;
+            max-width: 750px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1.1rem 2.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-family: 'Calibri', sans-serif;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, #0099c4 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 163, 216, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0, 163, 216, 0.4);
+        }
+
+        /* GRID LAYOUT */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        /* CARDS */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(0, 163, 216, 0.15);
+            border-color: var(--accent);
+        }
+
+        .card-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1.2rem;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            border-radius: 12px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 163, 216, 0.2);
+        }
+
+        .card h3 {
+            color: var(--dark);
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .card p {
+            color: var(--slate);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-list {
+            list-style: none;
+        }
+
+        .card-list li {
+            padding: 0.6rem 0;
+            color: var(--slate);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .card-list li:hover {
+            transform: translateX(6px);
+            color: var(--accent);
+        }
+
+        .card-list li::before {
+            content: '◆';
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* METRICS */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 2px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+        }
+
+        .metric-card:hover {
+            transform: scale(1.06) translateY(-8px);
+            box-shadow: 0 16px 32px rgba(0, 163, 216, 0.15);
+            border-color: var(--accent);
+        }
+
+        .metric-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--slate);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .sidebar {
+                width: 280px;
+            }
+
+            .main-content {
+                margin-left: 280px;
+                width: calc(100% - 280px);
+            }
+
+            .page {
+                padding: 2.5rem 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -320px;
+                width: 320px;
+                height: 100vh;
+                transition: left 0.3s ease;
+                z-index: 1001;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .page {
+                padding: 2rem 1.5rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-section {
+                padding: 2.5rem 2rem;
+            }
+
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="profile-avatar">
+                <i class="fas fa-user-tie"></i>
+            </div>
+            <h1>Rupika</h1>
+            <p>Healthcare Analyst</p>
+        </div>
+
+        <ul class="nav-menu">
+            <li><button onclick="showPage('home')" class="nav-btn active" data-page="home">
+                <i class="fas fa-home"></i> Home
+            </button></li>
+            <li><button onclick="showPage('about')" class="nav-btn" data-page="about">
+                <i class="fas fa-sparkles"></i> Who Am I?
+            </button></li>
+            <li><button onclick="showPage('experience')" class="nav-btn" data-page="experience">
+                <i class="fas fa-rocket"></i> Experience
+            </button></li>
+            <li><button onclick="showPage('contact')" class="nav-btn" data-page="contact">
+                <i class="fas fa-paper-plane"></i> Contact
+            </button></li>
+        </ul>
+
+        <!-- ABOUT SUBSECTIONS -->
+        <ul class="section-menu" id="aboutSections" style="display:none;">
+            <h3>Who Am I?</h3>
+            <li><button onclick="showSection('about-intro')" class="section-btn active" data-section="about-intro">
+                <i class="fas fa-user"></i> About Me
+            </button></li>
+            <li><button onclick="showSection('about-done')" class="section-btn" data-section="about-done">
+                <i class="fas fa-briefcase"></i> What I've Done
+            </button></li>
+            <li><button onclick="showSection('about-help')" class="section-btn" data-section="about-help">
+                <i class="fas fa-handshake"></i> How I Help
+            </button></li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <div class="contact-info">
+                <a href="mailto:rupikayerrapally@gmail.com" class="contact-link">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="https://linkedin.com" class="contact-link" target="_blank">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <p style="color: #E2ECF4; font-size: 0.8rem; margin-top: 1.2rem; text-align: center;">
+                    📍 Gurnee, Illinois
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <!-- HOME -->
+        <div id="home" class="page active">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h2>Hi! 👋</h2>
+                    <p class="subtitle">Healthcare Business Analyst & Underwriter</p>
+                    <p>Transforming healthcare operations through strategic analysis, performance guarantee management, and data-driven decision making. With 13+ years of experience, I help organizations optimize performance, manage risk, and drive operational excellence.</p>
+                    <div class="cta-buttons">
+                        <button class="btn btn-primary" onclick="showPage('about'); setTimeout(() => showSection('about-intro'), 100)">
+                            <i class="fas fa-arrow-right"></i> Who Am I
+                        </button>
+                        <button class="btn btn-primary" onclick="showPage('about'); setTimeout(() => showSection('about-done'), 100)" style="background: linear-gradient(135deg, #0099c4 0%, #007aa3 100%); box-shadow: 0 8px 20px rgba(0, 153, 196, 0.3);">
+                            <i class="fas fa-briefcase"></i> What I've Done
+                        </button>
+                        <button class="btn btn-primary" onclick="showPage('about'); setTimeout(() => showSection('about-help'), 100)" style="background: linear-gradient(135deg, #007aa3 0%, #005f82 100%); box-shadow: 0 8px 20px rgba(0, 122, 163, 0.3);">
+                            <i class="fas fa-handshake"></i> How I Help
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h1><i class="fas fa-chart-line"></i> Expertise</h1>
+                <div class="header-line"></div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon"><i class="fas fa-hospital"></i></div>
+                    <div class="metric-value">800M+</div>
+                    <div class="metric-label">Annual Claims</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon"><i class="fas fa-chart-pie"></i></div>
+                    <div class="metric-value">$4.8T</div>
+                    <div class="metric-label">US Healthcare Spend</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon"><i class="fas fa-network-wired"></i></div>
+                    <div class="metric-value">92%</div>
+                    <div class="metric-label">Digital Adoption Rate</div>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h1><i class="fas fa-bolt"></i> Core Capabilities</h1>
+                <div class="header-line"></div>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Performance Guarantees</h3>
+                    <p>Design and manage comprehensive PG frameworks with SLA monitoring and optimization.</p>
+                    <ul class="card-list">
+                        <li>PG Framework Development</li>
+                        <li>SLA Monitoring</li>
+                        <li>Penalty Analysis</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-database"></i></div>
+                    <h3>Operational Analytics</h3>
+                    <p>Build dashboards that provide real-time visibility into operations and metrics.</p>
+                    <ul class="card-list">
+                        <li>KPI Dashboards</li>
+                        <li>Metrics Tracking</li>
+                        <li>Trend Analysis</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-file-contract"></i></div>
+                    <h3>Underwriting & Analysis</h3>
+                    <p>Conduct comprehensive underwriting analysis and support risk-based decision making.</p>
+                    <ul class="card-list">
+                        <li>Underwriting Analysis</li>
+                        <li>Compliance Reviews</li>
+                        <li>Pricing Strategy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABOUT -->
+        <div id="about" class="page">
+            <!-- ABOUT INTRO SECTION -->
+            <div id="about-intro" class="section active">
+                <div class="page-header">
+                    <h1><i class="fas fa-sparkles"></i> Who Am I?</h1>
+                    <div class="header-line"></div>
+                    <p class="page-subtitle">Healthcare Professional | Data Analyst | Strategic Thinker</p>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-user-md"></i></div>
+                        <h3>Professional</h3>
+                        <p>Business Analyst Consultant at Highmark Health with deep expertise in healthcare claims operations and operational analytics.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-brain"></i></div>
+                        <h3>Approach</h3>
+                        <p>Turning complex operational challenges into simple, actionable solutions through data-driven analysis and strategic thinking.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-target"></i></div>
+                        <h3>Passion</h3>
+                        <p>Improving healthcare operations and helping organizations achieve operational excellence through better insights.</p>
+                    </div>
+                </div>
+
+                <div class="page-header" style="margin-top: 3rem;">
+                    <h1><i class="fas fa-crown"></i> Core Competencies</h1>
+                    <div class="header-line"></div>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-tasks"></i></div>
+                        <h3>Performance & SLA</h3>
+                        <ul class="card-list">
+                            <li>PG Framework Development</li>
+                            <li>Claims Timeliness Tracking</li>
+                            <li>KPI Management</li>
+                            <li>Penalty Analysis</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-file-invoice"></i></div>
+                        <h3>Underwriting & Assessment</h3>
+                        <ul class="card-list">
+                            <li>Underwriting Analysis</li>
+                            <li>Risk Compliance</li>
+                            <li>Pricing Development</li>
+                            <li>Account Evaluation</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-cogs"></i></div>
+                        <h3>Operations & Analysis</h3>
+                        <ul class="card-list">
+                            <li>Claims Operations</li>
+                            <li>Operational Analytics</li>
+                            <li>Data-Driven Reporting</li>
+                            <li>Process Optimization</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ABOUT DONE SECTION -->
+            <div id="about-done" class="section">
+                <div class="page-header">
+                    <h1><i class="fas fa-rocket"></i> What Have I Done So Far?</h1>
+                    <div class="header-line"></div>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Performance Guarantee Systems</h3>
+                        <p>Built comprehensive PG trackers and dashboards using Tableau monitoring claims SLAs across multiple networks with real-time compliance tracking.</p>
+                        <ul class="card-list">
+                            <li>100+ KPIs Tracked</li>
+                            <li>5+ Networks Managed</li>
+                            <li>Real-time Dashboards</li>
+                            <li>Penalty Analysis</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-database"></i></div>
+                        <h3>Operational Analytics</h3>
+                        <p>Created operational metrics reporting system with automated dashboards integrating Avaya, audit systems, and eBill platforms for unified visibility.</p>
+                        <ul class="card-list">
+                            <li>Integrated Systems</li>
+                            <li>Automated Reports</li>
+                            <li>Trend Analysis</li>
+                            <li>Executive Dashboards</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-file-invoice"></i></div>
+                        <h3>Underwriting & Proposals</h3>
+                        <p>Conducted comprehensive underwriting analysis and spearheaded proposal development securing major clients through data-driven risk analysis.</p>
+                        <ul class="card-list">
+                            <li>Risk Assessments</li>
+                            <li>Won $1000M+ Clients</li>
+                            <li>Underwriting Reports</li>
+                            <li>Strategic Proposals</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ABOUT HELP SECTION -->
+            <div id="about-help" class="section">
+                <div class="page-header">
+                    <h1><i class="fas fa-wand-magic-sparkles"></i> How Can I Help You?</h1>
+                    <div class="header-line"></div>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Performance Guarantee Management</h3>
+                        <p>Design and manage comprehensive PG frameworks. Monitor SLA compliance, calculate penalties, and support strategic performance initiatives.</p>
+                        <ul class="card-list">
+                            <li>PG Framework Development</li>
+                            <li>SLA Tracking & Compliance</li>
+                            <li>Penalty Calculations</li>
+                            <li>Performance Analytics</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Operational Analytics</h3>
+                        <p>Build advanced dashboards and reporting systems. Transform complex data into actionable business intelligence.</p>
+                        <ul class="card-list">
+                            <li>KPI Dashboard Design</li>
+                            <li>Metrics Tracking Systems</li>
+                            <li>Executive Reporting</li>
+                            <li>Trend Analysis</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-file-invoice"></i></div>
+                        <h3>Underwriting & Compliance</h3>
+                        <p>Conduct comprehensive underwriting analysis and compliance reviews. Support sound risk-based decision making and regulatory adherence.</p>
+                        <ul class="card-list">
+                            <li>Underwriting Analysis</li>
+                            <li>Compliance Reviews</li>
+                            <li>Pricing Development</li>
+                            <li>Account Assessment</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-cogs"></i></div>
+                        <h3>Claims Operations Optimization</h3>
+                        <p>Analyze and optimize claims workflows. Identify inefficiencies and implement process improvements.</p>
+                        <ul class="card-list">
+                            <li>Workflow Analysis</li>
+                            <li>Process Optimization</li>
+                            <li>Efficiency Improvements</li>
+                            <li>Quality Management</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-pen-fancy"></i></div>
+                        <h3>Proposal Writing & Development</h3>
+                        <p>Develop winning proposals and RFI responses. Craft compelling, data-driven narratives that address client needs and demonstrate value.</p>
+                        <ul class="card-list">
+                            <li>Proposal Development</li>
+                            <li>RFI/RFP Response</li>
+                            <li>Risk Analysis</li>
+                            <li>Client Alignment</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+                        <h3>Data Integration & Analysis</h3>
+                        <p>Integrate data from multiple operational systems. Build seamless data pipelines for unified visibility and strategic insights.</p>
+                        <ul class="card-list">
+                            <li>System Integration</li>
+                            <li>Data Consolidation</li>
+                            <li>Data Quality Management</li>
+                            <li>Unified Reporting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXPERIENCE PAGE -->
+        <div id="experience" class="page">
+            <div class="page-header">
+                <h1><i class="fas fa-rocket"></i> Experience Timeline</h1>
+                <div class="header-line"></div>
+                <p class="page-subtitle">13+ Years of Healthcare Innovation</p>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-briefcase"></i></div>
+                    <h3>Business Analyst Consultant</h3>
+                    <p><strong>Highmark Health (HNAS)</strong> | May 2024 – Present</p>
+                    <ul class="card-list">
+                        <li>Developed comprehensive PG trackers using Tableau</li>
+                        <li>Built 100+ KPI reporting system</li>
+                        <li>Designed integrated dashboards (Avaya, eBill, Audit)</li>
+                        <li>Created penalty calculation models</li>
+                        <li>Delivered monthly executive presentations</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-file-invoice"></i></div>
+                    <h3>Underwriter</h3>
+                    <p><strong>Highmark Health (HNAS)</strong> | April 2023 – May 2024</p>
+                    <ul class="card-list">
+                        <li>Conducted risk assessments & compliance reviews</li>
+                        <li>Developed competitive pricing strategies</li>
+                        <li>Created underwriting reports & dashboards</li>
+                        <li>Performed financial analysis & actuarial support</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-pen-fancy"></i></div>
+                    <h3>Proposal Analyst</h3>
+                    <p><strong>Flume Health</strong> | May 2021 – January 2023</p>
+                    <ul class="card-list">
+                        <li>Spearheaded proposal development</li>
+                        <li>Secured major self-funded client (1,000+ lives)</li>
+                        <li>Standardized proposal processes</li>
+                        <li>Delivered data-driven proposals</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Senior Business Analyst</h3>
+                    <p><strong>Mphasis</strong> | May 2010 – January 2012</p>
+                    <ul class="card-list">
+                        <li>Developed Life Sciences solutions</li>
+                        <li>Built proposal content</li>
+                        <li>Facilitated knowledge management</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-code"></i></div>
+                    <h3>Business Analyst</h3>
+                    <p><strong>Cognizant Technology Solutions</strong> | January 2008 – May 2010</p>
+                    <ul class="card-list">
+                        <li>Led successful RFP responses</li>
+                        <li>Won major biopharma project</li>
+                        <li>Managed offshore teams</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-search"></i></div>
+                    <h3>Research Analyst</h3>
+                    <p><strong>SmartAnalyst India Pvt. Ltd.</strong> | January 2006 – June 2007</p>
+                    <ul class="card-list">
+                        <li>Delivered market research reports</li>
+                        <li>Provided competitive intelligence</li>
+                        <li>Evaluated licensing opportunities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACT -->
+        <div id="contact" class="page">
+            <div class="page-header">
+                <h1><i class="fas fa-paper-plane"></i> Let's Connect</h1>
+                <div class="header-line"></div>
+                <p class="page-subtitle">Open to Opportunities & Collaborations</p>
+            </div>
+
+            <div style="background: white; padding: 4rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); border: 2px solid var(--border);">
+                <h2 style="color: var(--dark); font-size: 2rem; margin-bottom: 1rem; font-weight: 800; letter-spacing: -1px;">Get In Touch</h2>
+                <p style="color: var(--slate); font-size: 1.05rem; line-height: 1.8; margin-bottom: 2.5rem; max-width: 700px; margin-left: auto; margin-right: auto;">I'm interested in discussing healthcare analytics, performance optimization, underwriting strategy, and proposal development initiatives. Whether you're looking to improve operations, implement new systems, or develop business strategy, I'd love to hear from you.</p>
+
+                <form id="contactForm" style="max-width: 600px; margin: 0 auto 3rem;">
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; color: var(--dark); font-weight: 600; margin-bottom: 0.6rem; font-size: 0.95rem;">Your Name *</label>
+                        <input type="text" name="name" required style="width: 100%; padding: 0.85rem 1rem; border: 2px solid var(--border); border-radius: 8px; font-family: 'Calibri', sans-serif; font-size: 0.95rem; transition: all 0.3s ease;" placeholder="Enter your name" onfocus="this.style.borderColor='var(--accent)'; this.style.boxShadow='0 0 0 3px rgba(0, 163, 216, 0.1)'" onblur="this.style.borderColor='var(--border)'; this.style.boxShadow='none'">
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; color: var(--dark); font-weight: 600; margin-bottom: 0.6rem; font-size: 0.95rem;">Your Email *</label>
+                        <input type="email" name="email" required style="width: 100%; padding: 0.85rem 1rem; border: 2px solid var(--border); border-radius: 8px; font-family: 'Calibri', sans-serif; font-size: 0.95rem; transition: all 0.3s ease;" placeholder="your.email@example.com" onfocus="this.style.borderColor='var(--accent)'; this.style.boxShadow='0 0 0 3px rgba(0, 163, 216, 0.1)'" onblur="this.style.borderColor='var(--border)'; this.style.boxShadow='none'">
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; color: var(--dark); font-weight: 600; margin-bottom: 0.6rem; font-size: 0.95rem;">Subject *</label>
+                        <input type="text" name="subject" required style="width: 100%; padding: 0.85rem 1rem; border: 2px solid var(--border); border-radius: 8px; font-family: 'Calibri', sans-serif; font-size: 0.95rem; transition: all 0.3s ease;" placeholder="What's this about?" onfocus="this.style.borderColor='var(--accent)'; this.style.boxShadow='0 0 0 3px rgba(0, 163, 216, 0.1)'" onblur="this.style.borderColor='var(--border)'; this.style.boxShadow='none'">
+                    </div>
+                    <div style="margin-bottom: 2rem;">
+                        <label style="display: block; color: var(--dark); font-weight: 600; margin-bottom: 0.6rem; font-size: 0.95rem;">Message *</label>
+                        <textarea name="message" required style="width: 100%; padding: 0.85rem 1rem; border: 2px solid var(--border); border-radius: 8px; font-family: 'Calibri', sans-serif; font-size: 0.95rem; min-height: 150px; resize: vertical; transition: all 0.3s ease;" placeholder="Tell me about your project or opportunity..." onfocus="this.style.borderColor='var(--accent)'; this.style.boxShadow='0 0 0 3px rgba(0, 163, 216, 0.1)'" onblur="this.style.borderColor='var(--border)'; this.style.boxShadow='none'"></textarea>
+                    </div>
+                    <button type="submit" style="width: 100%; padding: 1.1rem 2.2rem; background: linear-gradient(135deg, var(--accent) 0%, #0099c4 100%); color: white; font-weight: 700; font-size: 0.95rem; border: none; border-radius: 8px; cursor: pointer; font-family: 'Calibri', sans-serif; transition: all 0.3s ease; box-shadow: 0 8px 20px rgba(0, 163, 216, 0.3);">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+
+                <div style="text-align: center; padding-top: 2rem; border-top: 1px solid var(--border);">
+                    <p style="color: var(--slate); font-size: 0.95rem; margin-bottom: 1.5rem;">or connect directly</p>
+                    <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="https://linkedin.com" target="_blank" style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 1.8rem; transition: all 0.4s ease; box-shadow: 0 6px 16px rgba(0, 163, 216, 0.2);" onmouseover="this.style.transform='translateY(-8px) scale(1.12) rotate(5deg)'; this.style.boxShadow='0 12px 28px rgba(0, 163, 216, 0.3)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 6px 16px rgba(0, 163, 216, 0.2)';" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <p style="color: var(--slate); font-size: 1rem; margin-top: 2rem; text-align: center;">
+                    <i class="fas fa-map-marker-alt" style="color: var(--accent); margin-right: 0.8rem; font-size: 1.2rem;"></i>
+                    <strong>Gurnee, Illinois</strong>
+                </p>
+                <p style="color: var(--slate); font-size: 0.85rem; text-align: center; margin-top: 1rem;">📍 Typically respond within 24-48 hours</p>
+            </div>
+        </div>
+
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[data-page="${pageId}"]`).classList.add('active');
+
+            const aboutSections = document.getElementById('aboutSections');
+            if (pageId === 'about') {
+                aboutSections.style.display = 'block';
+                const sections = document.querySelectorAll('#about .section');
+                sections.forEach(section => section.classList.remove('active'));
+                document.getElementById('about-intro').classList.add('active');
+            } else {
+                aboutSections.style.display = 'none';
+            }
+
+            window.scrollTo(0, 0);
+        }
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('#about .section');
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+
+            const sectionBtns = document.querySelectorAll('.section-btn');
+            sectionBtns.forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
